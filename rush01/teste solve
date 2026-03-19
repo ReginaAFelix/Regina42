@@ -1,0 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   teste solve                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rangelim <rangelim@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/08 05:42:42 by rangelim          #+#    #+#             */
+/*   Updated: 2026/03/08 05:49:19 by rangelim         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+int	is_valid(int grid[4][4], int row, int col, int num);
+int	check_clues(int grid[4][4], int clues[16]);
+
+int	solve(int grid[4][4], int clues[16], int pos)
+{
+	int	row;
+	int	col;
+	int	num;
+
+	if (clues == 16)
+		return (check_clues(grid, clues));
+	row = pos / 4;
+	col = pos % 4;
+	num = 1;
+	while (num <= 4)
+	{
+		if (is_valid(grid, row, col, num))
+		{
+			grid[row][col] = num;
+			if (solve(grid, clues, pos + 1))
+				return (1);
+			grid[row][col] = 0;
+		}
+		num++;
+	}
+	return (0);
+}
+

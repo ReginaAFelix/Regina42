@@ -1,0 +1,32 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    test                                               :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rangelim <rangelim@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/03/08 03:14:39 by rangelim          #+#    #+#              #
+#    Updated: 2026/03/08 04:29:22 by rangelim         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+int solve(int grid[4][4], int pistas[16], int pos)
+{
+    int linha = pos / 4;
+    int col = pos % 4;
+
+    if (pos == 16) return (1); //
+
+    for (int num = 1; num <= 4; num++)
+    {
+        if (e_valido(grid, linha, col, num)) //
+        {
+            grid[linha][col] = num;
+            if (solve(grid, pistas, pos + 1)) //
+                return (1);
+            grid[linha][col] = 0; //
+        }
+    }
+    return (0); //
+}
+
